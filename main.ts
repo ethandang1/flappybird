@@ -4,6 +4,25 @@ function Seaweed () {
     // Randomly creates gap between obstacles
     gap = Math.randomRange(0, 3)
 }
+function Prompt () {
+    // Asks player if they would like to play
+    //
+    ask_bird = game.askForString("would you like to play")
+    if (ask_bird == "yes") {
+        Shark()
+        Background()
+        // prompts the player what to do at the start
+        game.splash("Press any button to jump", "Dodge the seaweed and beat the high score")
+        // Creates a bubble effect at the start and forever
+        effects.bubbles.startScreenEffect()
+    } else {
+        Shark()
+        Background()
+        game.splash("too bad")
+        // prompts the player what to do at the start
+        game.splash("Press any button to jump", "Dodge the seaweed and beat the high score")
+    }
+}
 function SeaweedSpawn () {
     // Shark dies when touching the top and bottom.
     if (Sharky.bottom > 120 || Sharky.top < 0) {
@@ -137,10 +156,6 @@ function Background () {
 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
 `)
-    // prompts the player what to do at the start
-    game.splash("Press any button to jump", "Dodge the seaweed and beat the high score")
-    // Creates a bubble effect at the start and forever
-    effects.bubbles.startScreenEffect()
 }
 // When the shark hits the seaweed it dies.
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
@@ -149,21 +164,21 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, ot
 function Shark () {
     // Makes my shark sprite
     Sharky = sprites.create(img`
-. . . . . . . . . . f f f c c . . . f . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . f b b b b c f f . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . f b f f b b b b b . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . f f b b b b f f b b b b . . . . . . . . . . . . . 
-. . . . . . . . . f f c b b b b b f f b b b b b . . . . . . . . . . . . 
-. . . . . . . . f c c c b c b c b b b b c b c b . . . . . . . . . . . . 
-c c c c c . . f c c c b c b c b b b b b b c b c . . . . . . . . . . . . 
-c b b d d c f c c c c b c b c b b b b b b c b c . . . . . . . . . . . . 
-. c c b d d c c c c c b b b b b b b b b b b b b . . . . . . . . . . . . 
-. . c c b b c c c c c c b b b b b b b b b b b b . . . . . . . . . . . . 
-. . f c c b f c c c c c c b b b b b b b b b b c . . . . . . . . . . . . 
-. . f c c f c b b c c c c b b b b b b b b b c c . . . . . . . . . . . . 
-. f c b b f . c d d d d d f b b b b b b b b f d . . . . . . . . . . . . 
+. . . . . . . . . . f f f c c . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . f b b b b c f f f f . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . f b f f b b b b b f f f . . . . . . . . . . . . . 
+. . . . . . . . . . . f f b b b b f f b b b b f . . . . . . . . . . . . 
+. . . . . . . . . f f c b b b b b f f b b b b b f . . . . . . . . . . . 
+. . . . . . . . f c c c b c b c b b b b c b c b f . . . . . . . . . . . 
+c c c c c . . f c c c b c b c b b b b b b c b c f . . . . . . . . . . . 
+c b b d d c f c c c c b c b c b b b b b b c b c f . . . . . . . . . . . 
+. c c b d d c c c c c b b b b b b b b b b b b b f . . . . . . . . . . . 
+. . c c b b c c c c c c b b b b b b b b b b b b f . . . . . . . . . . . 
+. . f c c b f c c c c c c b b b b b b b b b b c f . . . . . . . . . . . 
+. . f c c f c b b c c c c b b b b b b b b b c c f . . . . . . . . . . . 
+. f c b b f . c d d d d d f b b b b b b b b f d f . . . . . . . . . . . 
 . f b b f . . . c d d d f b b d b f . b d b b f . . . . . . . . . . . . 
-f b b f . . . . . c c f b b d b f f f . b d b b . . . . . . . . . . . . 
+f b b f . . . . . c c f b b d b f f f . b d b b f . . . . . . . . . . . 
 f f f . . . . . . . . f f f f f . . . . f f f f . . . . . . . . . . . . 
 `, SpriteKind.Player)
     // Sets shark acceleration y to 300
@@ -178,9 +193,9 @@ let projectile: Sprite = null
 let bottomImage: Image = null
 let topImage: Image = null
 let Sharky: Sprite = null
+let ask_bird = ""
 let gap = 0
-Shark()
-Background()
+Prompt()
 game.onUpdateInterval(2000, function () {
     Seaweed()
     // Creates obstacle
